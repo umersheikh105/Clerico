@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="657.0" prefWidth="929.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LoginPageController">
+   <children>
+      <TextField fx:id="usernameTextField" layoutX="318.0" layoutY="304.0" prefHeight="45.0" prefWidth="294.0" promptText="Username" style="-fx-background-color: #696969;">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font></TextField>
+      <ImageView fitHeight="95.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0">
+         <image>
+            <Image url="@../../Clerico%20Logo.png" />
+         </image>
+      </ImageView>
+      <PasswordField fx:id="passwordTextField" layoutX="318.0" layoutY="366.0" prefHeight="45.0" prefWidth="294.0" promptText="Password" style="-fx-background-color: #696969;">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font></PasswordField>
+      <Button fx:id="login_btn" layoutX="318.0" layoutY="451.0" mnemonicParsing="false" onAction="#switchToCalendar" prefHeight="45.0" prefWidth="294.0" style="-fx-background-color: #696969;" text="Login" textFill="WHITE">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font></Button>
+      <Label layoutX="518.0" layoutY="411.0" style="-fx-background-color: #D3D3D3;" text="Forgot Password" textFill="WHITE" underline="true">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font></Label>
+      <Label layoutX="291.0" layoutY="259.0" prefHeight="28.0" prefWidth="360.0" text="Login to Clerico Heating &amp; Cooling LLC">
+         <font>
+            <Font name="System Bold Italic" size="19.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="586.0" layoutY="316.0">
+         <image>
+            <Image url="@../../../Downloads/username3.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="16.0" layoutX="589.0" layoutY="378.0">
+         <image>
+            <Image url="@../../../Downloads/password.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>
