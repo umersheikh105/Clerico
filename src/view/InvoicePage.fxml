@@ -113,11 +113,11 @@
                               </VBox>
                            </children>
                         </HBox>
-                        <TableView prefHeight="427.0" prefWidth="569.0">
+                        <TableView fx:id="tableView" prefHeight="427.0" prefWidth="569.0">
                           <columns>
-                            <TableColumn prefWidth="118.0" text="ID" />
-                            <TableColumn prefWidth="305.0" text="Desc." />
-                              <TableColumn prefWidth="145.0" text="Client" />
+                            <TableColumn fx:id="tableDescription" prefWidth="328.0" text="Description" />
+                            <TableColumn fx:id="tableLaborCosts" prefWidth="132.0" text="Labor Costs" />
+                              <TableColumn fx:id="tableDate" prefWidth="108.0" text="Date" />
                           </columns>
                         </TableView>
                      </children>

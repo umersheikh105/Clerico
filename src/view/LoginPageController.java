@@ -24,37 +24,45 @@ public class LoginPageController {
 	private PasswordField passwordTextField;
 	@FXML
 	private Button login_btn;
-	
-	private String username = "username";
-	private String password = "password";
+
+	private static String username = "username";
+	private static String password = "password";
 
 	// Event Listener on Button[#login_btn].onAction
 	@FXML
 	public void switchToCalendar(ActionEvent event) throws IOException {
-		if(!usernameTextField.getText().equals(username)||!passwordTextField.getText().equals(password)) {
+		if (!usernameTextField.getText().equals(username) || !passwordTextField.getText().equals(getPassword())) {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setHeaderText(null);
 			alert.setContentText("Username or Password is Incorrect");
 			alert.showAndWait();
 			return;
 		}
-		if(usernameTextField.getText().isEmpty()||passwordTextField.getText().isEmpty()) {
+		if (usernameTextField.getText().isEmpty() || passwordTextField.getText().isEmpty()) {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setHeaderText(null);
 			alert.setContentText("Please Enter all of the fields");
 			alert.showAndWait();
 			return;
 		}
-		
-		if(usernameTextField.getText().equals(username)&&passwordTextField.getText().equals(password)) {
+
+		if (usernameTextField.getText().equals(username) && passwordTextField.getText().equals(getPassword())) {
 			Parent mainParent = FXMLLoader.load(getClass().getResource("HomeCalendarPage.fxml"));
-	    	Scene invoiceScene = new Scene(mainParent);
-	    	Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-	    	
-	    	window.setScene(invoiceScene);
-	    	window.show();
+			Scene invoiceScene = new Scene(mainParent);
+			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+			window.setScene(invoiceScene);
+			window.show();
 		}
-		
 
 	}
+
+	public static String getPassword() {
+		return password;
+	}
+
+	public static void setPassword(String pass) {
+		password = pass;
+	}
+
 }

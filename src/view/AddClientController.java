@@ -6,14 +6,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 
 import javafx.scene.control.TextField;
-
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import database.*;
+import database.DBConnection;
 import javafx.event.ActionEvent;
 
-public class AddClientController implements Initializable{
+public class AddClientController implements Initializable {
 	@FXML
 	private TextField textFieldFirstName;
 	@FXML
@@ -23,16 +23,19 @@ public class AddClientController implements Initializable{
 	@FXML
 	private TextField textFieldNumber;
 	@FXML
+	private TextField textFieldNotes;
+	@FXML
 	private Button clientAddButton;
 	@FXML
 	private Button clientCancelButton;
-	
+
 	DBConnection connection;
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		connection = new DBConnection();
 	}
+
 	// Event Listener on Button[#clientAddButton].onAction
 	@FXML
 	public void addClient(ActionEvent event) {
@@ -40,48 +43,41 @@ public class AddClientController implements Initializable{
 		String lastName = textFieldLastName.getText();
 		String address = textFieldAddress.getText();
 		String number1 = textFieldNumber.getText();
-		String notes = "";
-		/*if (!(StringUtils.isStrictlyNumeric(number1))) {
-			Alert alert = new Alert(Alert.AlertType.ERROR);
-			alert.setHeaderText(null);
-			alert.setContentText("Please enter a number");
-			alert.showAndWait();
-			return;
-		} */
-		
-		if(firstName.isEmpty()||lastName.isEmpty()||address.isEmpty()||number1.isEmpty()) {
+		String notes = textFieldNotes.getText();
+		/*
+		 * if (!(StringUtils.isStrictlyNumeric(number1))) { Alert alert = new
+		 * Alert(Alert.AlertType.ERROR); alert.setHeaderText(null);
+		 * alert.setContentText("Please enter a number"); alert.showAndWait(); return; }
+		 */
+
+		if (firstName.isEmpty() || lastName.isEmpty() || address.isEmpty() || number1.isEmpty()) {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setHeaderText(null);
 			alert.setContentText("Please Enter all of the fields");
 			alert.showAndWait();
 			return;
 		}
-			String sqlInsert = "INSERT INTO Client (firstname, lastname, number, address, notes) VALUES (" 
-					+ "'"+ firstName + "'," 
-					+ "'"+ lastName + "'," 
-					+ "'"+ number1 + "'," 
-					+ "'"+ address + "'," 
-					+ "'"+ notes + "'"
-					+ ")";
-					
-			if(connection.executeAction(sqlInsert)) {
-				Alert alert = new Alert(Alert.AlertType.INFORMATION);
-				alert.setHeaderText(null);
-				alert.setContentText("Success");
-				alert.showAndWait();
-			}
-			else {
-				Alert alert = new Alert(Alert.AlertType.ERROR);
-				alert.setHeaderText(null);
-				alert.setContentText("Failed");
-				alert.showAndWait();
-			}
-		
-		
+		String sqlInsert = "INSERT INTO Client (firstname, lastname, number, address, notes) VALUES (" + "'" + firstName
+				+ "'," + "'" + lastName + "'," + "'" + number1 + "'," + "'" + address + "'," + "'" + notes + "'" + ")";
+
+		if (connection.executeAction(sqlInsert)) {
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setHeaderText(null);
+			alert.setContentText("Success");
+			alert.showAndWait();
+		} else {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setHeaderText(null);
+			alert.setContentText("Failed");
+			alert.showAndWait();
+		}
+
 	}
+
 	// Event Listener on Button[#clientCancelButton].onAction
 	@FXML
-	public void cancelClient(ActionEvent event) {
+	public void cancelClient(ActionEvent event) throws IOException {
 		textFieldFirstName.getScene().getWindow().hide();
 	}
+
 }

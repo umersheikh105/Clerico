@@ -15,32 +15,49 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import database.DBConnection;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.scene.control.TableColumn;
 
-public class InvoicePageController implements Initializable {
+public class ClientListPageController implements Initializable {
 	@FXML
-	private Button newInvoice_btn;
+	private Button calendar_btn;
 	@FXML
-	private TableView<Invoice> tableView;
+	private Button invoice_btn;
 	@FXML
-	private TableColumn<Invoice, String> tableDescription;
+	private Button serviceOrders_btn;
 	@FXML
-	private TableColumn<Invoice, String> tableLaborCosts;
+	private Button quotes_btn;
 	@FXML
-	private TableColumn<Invoice, String> tableDate;
+	private Button settings_btn;
+	@FXML
+	private Button newClient_btn;
+	@FXML
+	private TableView<Client> tableView;
+	@FXML
+	private TableColumn<Client, Integer> tableID;
+	@FXML
+	private TableColumn<Client, String> tableFirstName;
+	@FXML
+	private TableColumn<Client, String> tableLastName;
+	@FXML
+	private TableColumn<Client, String> tableAddress;
+	@FXML
+	private TableColumn<Client, String> tablePhoneNumber;
+	@FXML
+	private TableColumn<Client, String> tableNotes;
 
 	DBConnection connection;
 
-	ObservableList<Invoice> list = FXCollections.observableArrayList();
+	ObservableList<Client> list = FXCollections.observableArrayList();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -49,22 +66,19 @@ public class InvoicePageController implements Initializable {
 	}
 
 	private void loadDataIntoTable() {
-		tableDescription.setCellValueFactory(new PropertyValueFactory<>("notes"));
-		tableLaborCosts.setCellValueFactory(new PropertyValueFactory<>("laborCosts"));
-		tableDate.setCellValueFactory(new PropertyValueFactory<>("date"));
-	}
-
-	private void initializeColumn() {
 		connection = new DBConnection();
-		String sql = "SELECT * FROM Form";
+		String sql = "SELECT * FROM Client";
 		ResultSet rs = connection.executeQuery(sql);
 		try {
 			while (rs.next()) {
-				String laborCosts = String.valueOf(rs.getInt("labor_cost"));
-				String date = String.valueOf(rs.getDate("date"));
+				Integer id = new Integer(rs.getInt("client_id"));
+				String firstName = rs.getString("firstname");
+				String lastName = rs.getString("lastname");
+				String number = rs.getString("number");
+				String address = rs.getString("address");
 				String notes = rs.getString("notes");
 
-				list.add(new Invoice(notes, laborCosts, date));
+				list.add(new Client(id, firstName, lastName, address, number, notes));
 
 			}
 		} catch (SQLException e) {
@@ -72,31 +86,57 @@ public class InvoicePageController implements Initializable {
 		}
 
 		tableView.getItems().setAll(list);
+	}
+
+	private void initializeColumn() {
+		tableID.setCellValueFactory(new PropertyValueFactory<>("id"));
+		tableFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+		tableLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+		tableAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+		tablePhoneNumber.setCellValueFactory(new PropertyValueFactory<>("number"));
+		tableNotes.setCellValueFactory(new PropertyValueFactory<>("notes"));
 
 	}
 
-	public static class Invoice {
+	public static class Client {
+		private final SimpleIntegerProperty id;
+		private final SimpleStringProperty firstName;
+		private final SimpleStringProperty lastName;
+		private final SimpleStringProperty address;
+		private final SimpleStringProperty number;
 		private final SimpleStringProperty notes;
-		private final SimpleStringProperty laborCosts;
-		private final SimpleStringProperty date;
 
-		Invoice(String notes, String laborCosts, String date) {
+		Client(Integer id, String firstName, String lastName, String address, String number, String notes) {
+			this.id = new SimpleIntegerProperty(id);
+			this.firstName = new SimpleStringProperty(firstName);
+			this.lastName = new SimpleStringProperty(lastName);
+			this.address = new SimpleStringProperty(address);
+			this.number = new SimpleStringProperty(number);
 			this.notes = new SimpleStringProperty(notes);
-			this.laborCosts = new SimpleStringProperty(laborCosts);
-			this.date = new SimpleStringProperty(date);
+		}
 
+		public Integer getID() {
+			return new Integer(id.get());
+		}
+
+		public String getFirstName() {
+			return firstName.get();
+		}
+
+		public String getLastName() {
+			return lastName.get();
+		}
+
+		public String getAddress() {
+			return address.get();
+		}
+
+		public String getNumber() {
+			return number.get();
 		}
 
 		public String getNotes() {
 			return notes.get();
-		}
-
-		public String getLaborCosts() {
-			return laborCosts.get();
-		}
-
-		public String getDate() {
-			return date.get();
 		}
 
 	}
@@ -124,9 +164,9 @@ public class InvoicePageController implements Initializable {
 
 	}
 
-	// Event Listener on Button[#serviceOrders_btn].onAction
+	// Event Listener on Button[#serviceOrder_btn].onAction
 	@FXML
-	public void switchToServiceOrder(ActionEvent event) throws IOException {
+	public void switchToServiceOrders(ActionEvent event) throws IOException {
 		Parent mainParent = FXMLLoader.load(getClass().getResource("ServiceOrdersPage.fxml"));
 		Scene invoiceScene = new Scene(mainParent);
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -148,18 +188,6 @@ public class InvoicePageController implements Initializable {
 
 	}
 
-	// Event Listener on Button[#clientList_btn].onAction
-	@FXML
-	public void switchToClientList(ActionEvent event) throws IOException {
-		Parent mainParent = FXMLLoader.load(getClass().getResource("ClientListPage.fxml"));
-		Scene invoiceScene = new Scene(mainParent);
-		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-		window.setScene(invoiceScene);
-		window.show();
-
-	}
-
 	// Event Listener on Button[#settings_btn].onAction
 	@FXML
 	public void switchToSettings(ActionEvent event) throws IOException {
@@ -172,11 +200,23 @@ public class InvoicePageController implements Initializable {
 
 	}
 
+	// Event Listener on Button[#clientList_btn].onAction
+	@FXML
+	public void switchToClientList(ActionEvent event) throws IOException {
+		Parent mainParent = FXMLLoader.load(getClass().getResource("ClientListPage.fxml"));
+		Scene invoiceScene = new Scene(mainParent);
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+		window.setScene(invoiceScene);
+		window.show();
+
+	}
+
 	// Event Listener on Button[#newInvoice_btn].onAction
 	@FXML
 	void loadWindow(ActionEvent action) {
 		try {
-			Parent parent = FXMLLoader.load(getClass().getResource("AddInvoice.fxml"));
+			Parent parent = FXMLLoader.load(getClass().getResource("AddClient.fxml"));
 			Stage stage = new Stage(StageStyle.DECORATED);
 			stage.setScene(new Scene(parent));
 			stage.show();
@@ -185,4 +225,5 @@ public class InvoicePageController implements Initializable {
 		}
 
 	}
+
 }

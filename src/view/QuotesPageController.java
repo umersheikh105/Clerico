@@ -28,55 +28,59 @@ public class QuotesPageController {
 	@FXML
 	public void switchToCalendar(ActionEvent event) throws IOException {
 		Parent mainParent = FXMLLoader.load(getClass().getResource("HomeCalendarPage.fxml"));
-    	Scene invoiceScene = new Scene(mainParent);
-    	Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-    	
-    	window.setScene(invoiceScene);
-    	window.show();
+		Scene invoiceScene = new Scene(mainParent);
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+		window.setScene(invoiceScene);
+		window.show();
 
 	}
+
 	// Event Listener on Button[#invoice_btn].onAction
 	@FXML
 	public void switchToInvoice(ActionEvent event) throws IOException {
 		Parent mainParent = FXMLLoader.load(getClass().getResource("InvoicePage.fxml"));
-    	Scene invoiceScene = new Scene(mainParent);
-    	Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-    	
-    	window.setScene(invoiceScene);
-    	window.show();
+		Scene invoiceScene = new Scene(mainParent);
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+		window.setScene(invoiceScene);
+		window.show();
 
 	}
+
 	// Event Listener on Button[#serviceOrders_btn].onAction
 	@FXML
 	public void switchToServiceOrders(ActionEvent event) throws IOException {
 		Parent mainParent = FXMLLoader.load(getClass().getResource("ServiceOrdersPage.fxml"));
-    	Scene invoiceScene = new Scene(mainParent);
-    	Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-    	
-    	window.setScene(invoiceScene);
-    	window.show();
+		Scene invoiceScene = new Scene(mainParent);
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+		window.setScene(invoiceScene);
+		window.show();
 
 	}
+
 	// Event Listener on Button[#clientList_btn].onAction
 	@FXML
 	public void switchToClientList(ActionEvent event) throws IOException {
 		Parent mainParent = FXMLLoader.load(getClass().getResource("ClientListPage.fxml"));
-    	Scene invoiceScene = new Scene(mainParent);
-    	Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-    	
-    	window.setScene(invoiceScene);
-    	window.show();
+		Scene invoiceScene = new Scene(mainParent);
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+		window.setScene(invoiceScene);
+		window.show();
 
 	}
+
 	// Event Listener on Button[#settings_btn].onAction
 	@FXML
 	public void switchToSettings(ActionEvent event) throws IOException {
 		Parent mainParent = FXMLLoader.load(getClass().getResource("SettingsPage.fxml"));
-    	Scene invoiceScene = new Scene(mainParent);
-    	Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-    	
-    	window.setScene(invoiceScene);
-    	window.show();
+		Scene invoiceScene = new Scene(mainParent);
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+		window.setScene(invoiceScene);
+		window.show();
 
 	}
 }

@@ -7,7 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="534.0" prefWidth="749.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ClientListController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="534.0" prefWidth="749.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ClientListPageController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
          <top>
@@ -113,14 +113,14 @@
                               </VBox>
                            </children>
                         </HBox>
-                        <TableView prefHeight="427.0" prefWidth="569.0">
+                        <TableView fx:id="tableView" prefHeight="427.0" prefWidth="569.0">
                           <columns>
-                            <TableColumn prefWidth="30.0" text="ID" />
-                            <TableColumn prefWidth="97.0" text="Firstname" />
-                              <TableColumn prefWidth="85.0" text="Lastname" />
-                              <TableColumn prefWidth="126.0" text="Address" />
-                              <TableColumn prefWidth="88.0" text="Phone Number" />
-                              <TableColumn prefWidth="142.0" text="Notes" />
+                            <TableColumn fx:id="tableID" prefWidth="30.0" text="ID" />
+                            <TableColumn fx:id="tableFirstName" prefWidth="97.0" text="Firstname" />
+                              <TableColumn fx:id="tableLastName" prefWidth="85.0" text="Lastname" />
+                              <TableColumn fx:id="tableAddress" prefWidth="126.0" text="Address" />
+                              <TableColumn fx:id="tablePhoneNumber" prefWidth="88.0" text="Phone Number" />
+                              <TableColumn fx:id="tableNotes" prefWidth="142.0" text="Notes" />
                           </columns>
                         </TableView>
                      </children>
