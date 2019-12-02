@@ -32,6 +32,7 @@ public class DBConnection {
     	}
     	return result;
     }
+	//this executes an action
     public boolean executeAction(String str) {
     	try {		
     	connection = this.getConnection();
