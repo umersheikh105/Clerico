@@ -30,60 +30,41 @@ public class InvoicePageController implements Initializable {
 	@FXML
 	private Button newInvoice_btn;
 	@FXML
-	private  TableView<Invoice> tableView;
+	private TableView<Invoice> tableView;
 	@FXML
 	private TableColumn<Invoice, String> tableDescription;
 	@FXML
 	private TableColumn<Invoice, String> tableLaborCosts;
 	@FXML
 	private TableColumn<Invoice, String> tableDate;
-	@FXML
-	private TableColumn<Invoice, String> tableFormID;
-	@FXML
-	private TableColumn<Invoice, String> tableClientID;
 
 	DBConnection connection;
 
-	 ObservableList<Invoice> list = FXCollections.observableArrayList();
-	
-	public void addToInvoiceTable(Invoice invoice) {
-		tableView.getItems().add(invoice);
-	}
+	ObservableList<Invoice> list = FXCollections.observableArrayList();
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		initializeColumn();
 		loadDataIntoTable();
 	}
 
-	private void initializeColumn() {
-		tableFormID.setCellValueFactory(new PropertyValueFactory<>("fid"));
-		tableClientID.setCellValueFactory(new PropertyValueFactory<>("cid"));
+	private void loadDataIntoTable() {
 		tableDescription.setCellValueFactory(new PropertyValueFactory<>("notes"));
 		tableLaborCosts.setCellValueFactory(new PropertyValueFactory<>("laborCosts"));
 		tableDate.setCellValueFactory(new PropertyValueFactory<>("date"));
 	}
 
-	private void loadDataIntoTable() {
-		connection = DBConnection.getInstance();
+	private void initializeColumn() {
+		connection = new DBConnection();
 		String sql = "SELECT * FROM Form";
 		ResultSet rs = connection.executeQuery(sql);
 		try {
 			while (rs.next()) {
-				int formID = rs.getInt("form_id");
-				String fid = String.valueOf(formID);
 				String laborCosts = String.valueOf(rs.getInt("labor_cost"));
 				String date = String.valueOf(rs.getDate("date"));
 				String notes = rs.getString("notes");
-				String formType = rs.getString("form_type");
-				
-				String sqlClientForm = "SELECT * FROM ClientForm where form_id = " + "'" + formID + "'";
-				ResultSet rs1 = connection.executeQuery(sqlClientForm);
-				rs1.next();
-				String cid = String.valueOf(rs1.getInt("client_id"));
-				
-				if (formType.equals("I")) {
-					list.add(new Invoice(fid, cid, notes, laborCosts, date));
-				}
+
+				list.add(new Invoice(notes, laborCosts, date));
 
 			}
 		} catch (SQLException e) {
@@ -95,27 +76,15 @@ public class InvoicePageController implements Initializable {
 	}
 
 	public static class Invoice {
-		private final SimpleStringProperty cid;
-		private final SimpleStringProperty fid;
 		private final SimpleStringProperty notes;
 		private final SimpleStringProperty laborCosts;
 		private final SimpleStringProperty date;
 
-		Invoice(String fid, String cid, String notes, String laborCosts, String date) {
-			this.fid = new SimpleStringProperty(fid);
-			this.cid = new SimpleStringProperty(cid);
+		Invoice(String notes, String laborCosts, String date) {
 			this.notes = new SimpleStringProperty(notes);
 			this.laborCosts = new SimpleStringProperty(laborCosts);
 			this.date = new SimpleStringProperty(date);
 
-		}
-
-		public String getCid() {
-			return cid.get();
-		}
-
-		public String getFid() {
-			return fid.get();
 		}
 
 		public String getNotes() {

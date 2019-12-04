@@ -108,18 +108,16 @@
                                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                                  </HBox.margin>
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#loadAddServiceOrderWindow" prefHeight="42.0" prefWidth="167.0" text="New Service Order" />
+                                    <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="167.0" text="New Service Order" />
                                  </children>
                               </VBox>
                            </children>
                         </HBox>
-                        <TableView fx:id="tableView" prefHeight="427.0" prefWidth="569.0">
+                        <TableView prefHeight="427.0" prefWidth="569.0">
                           <columns>
-                            <TableColumn fx:id="tableFormID" prefWidth="63.0" text="Form ID" />
-                            <TableColumn fx:id="tableClientID" prefWidth="62.0" text="Client ID" />
-                              <TableColumn fx:id="tableDescription" prefWidth="247.0" text="Description" />
-                              <TableColumn fx:id="tableLaborCosts" prefWidth="94.0" text="Labor Costs" />
-                              <TableColumn fx:id="tableDate" prefWidth="101.0" text="Date" />
+                            <TableColumn prefWidth="118.0" text="ID" />
+                            <TableColumn prefWidth="305.0" text="Desc." />
+                              <TableColumn prefWidth="145.0" text="Client" />
                           </columns>
                         </TableView>
                      </children>

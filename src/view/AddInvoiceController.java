@@ -39,7 +39,7 @@ public class AddInvoiceController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		connection = DBConnection.getInstance();
+		connection = new DBConnection();
 		ResultSet rs = connection.executeQuery("select * from Client");
 		try {
 			while (rs.next()) {
@@ -63,7 +63,7 @@ public class AddInvoiceController implements Initializable {
 	// Event Listener on Button[#invoiceAddButton].onAction
 	@FXML
 	public void addInvoice(ActionEvent event) throws SQLException {
-		connection = DBConnection.getInstance();
+		connection = new DBConnection();
 		String laborCost = textFieldLaborCost.getText();
 		String signature = textFieldSignature.getText();
 		String notes = textFieldNotes.getText();

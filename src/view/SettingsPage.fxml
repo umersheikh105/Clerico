@@ -104,16 +104,6 @@
                                  </HBox.margin>
                                  <children>
                                     <Button mnemonicParsing="false" onAction="#loadWindow" text="Change Password" />
-                                    <Button layoutX="155.0" layoutY="28.0" mnemonicParsing="false" onAction="#loadAddPartWindow" prefHeight="25.0" prefWidth="111.0" text="Add Part">
-                                       <VBox.margin>
-                                          <Insets top="30.0" />
-                                       </VBox.margin>
-                                    </Button>
-                                    <Button layoutX="155.0" layoutY="65.0" mnemonicParsing="false" onAction="#loadPartsTableWindow" prefHeight="25.0" prefWidth="111.0" text="Parts Table">
-                                       <VBox.margin>
-                                          <Insets top="30.0" />
-                                       </VBox.margin>
-                                    </Button>
                                  </children>
                               </VBox>
                            </children>

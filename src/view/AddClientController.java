@@ -33,7 +33,7 @@ public class AddClientController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		connection = DBConnection.getInstance();
+		connection = new DBConnection();
 	}
 
 	// Event Listener on Button[#clientAddButton].onAction
