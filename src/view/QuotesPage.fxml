@@ -120,6 +120,8 @@
                               <TableColumn fx:id="tableDescription" prefWidth="283.0" text="Description" />
                               <TableColumn fx:id="tableLaborCosts" prefWidth="71.0" text="Labor Costs" />
                               <TableColumn fx:id="tableDate" prefWidth="105.0" text="Date" />
+                             
+                             
                           </columns>
                         </TableView>
                      </children>
