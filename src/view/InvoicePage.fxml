@@ -115,9 +115,11 @@
                         </HBox>
                         <TableView fx:id="tableView" prefHeight="427.0" prefWidth="569.0">
                           <columns>
-                            <TableColumn fx:id="tableDescription" prefWidth="328.0" text="Description" />
-                            <TableColumn fx:id="tableLaborCosts" prefWidth="132.0" text="Labor Costs" />
-                              <TableColumn fx:id="tableDate" prefWidth="108.0" text="Date" />
+                              <TableColumn fx:id="tableFormID" prefWidth="55.0" text="Form ID" />
+                              <TableColumn fx:id="tableClientID" prefWidth="53.0" text="Client ID" />
+                            <TableColumn fx:id="tableDescription" prefWidth="259.0" text="Description" />
+                            <TableColumn fx:id="tableLaborCosts" prefWidth="96.0" text="Labor Costs" />
+                              <TableColumn fx:id="tableDate" minWidth="0.0" prefWidth="105.0" text="Date" />
                           </columns>
                         </TableView>
                      </children>

@@ -103,12 +103,13 @@
                                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                                  </HBox.margin>
                               </TextField>
+                              <Button mnemonicParsing="false" onAction="#deleteClient" prefHeight="42.0" prefWidth="250.0" text="Delete" />
                               <VBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0">
                                  <HBox.margin>
                                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                                  </HBox.margin>
                                  <children>
-                                    <Button fx:id="newClient_btn" mnemonicParsing="false" onAction="#loadWindow" prefHeight="42.0" prefWidth="167.0" text="New Client" />
+                                    <Button fx:id="newClient_btn" mnemonicParsing="false" onAction="#loadWindow" prefHeight="42.0" prefWidth="118.0" text="New Client" />
                                  </children>
                               </VBox>
                            </children>

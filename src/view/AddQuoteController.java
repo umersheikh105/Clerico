@@ -19,7 +19,7 @@ import javafx.event.ActionEvent;
 
 import javafx.scene.control.ChoiceBox;
 
-public class AddInvoiceController implements Initializable {
+public class AddQuoteController implements Initializable {
 	@FXML
 	private ChoiceBox<String> clientChoiceBox;
 	@FXML
@@ -62,7 +62,7 @@ public class AddInvoiceController implements Initializable {
 
 	// Event Listener on Button[#invoiceAddButton].onAction
 	@FXML
-	public void addInvoice(ActionEvent event) throws SQLException {
+	public void addQuote(ActionEvent event) throws SQLException {
 		connection = DBConnection.getInstance();
 		String laborCost = textFieldLaborCost.getText();
 		String signature = textFieldSignature.getText();
@@ -92,8 +92,8 @@ public class AddInvoiceController implements Initializable {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String today = formatter.format(date);
 
-		String sqlInsert = "INSERT INTO Form (part_id, labor_cost, date, notes) VALUES (" + "'" + partID + "'," + "'"
-				+ Integer.parseInt(laborCost) + "'," + "'" + today + "'," + "'" + notes + "'" + ")";
+		String sqlInsert = "INSERT INTO Form (part_id, labor_cost, date, notes, form_type) VALUES (" + "'" + partID + "'," + "'"
+				+ Integer.parseInt(laborCost) + "'," + "'" + today + "'," + "'" + notes + "'," + "'Q'" + ")";
 
 		connection.executeAction(sqlInsert);
 
@@ -128,7 +128,7 @@ public class AddInvoiceController implements Initializable {
 
 	// Event Listener on Button[#invoiceCancelButton].onAction
 	@FXML
-	public void cancelInvoice(ActionEvent event) {
+	public void cancelQuote(ActionEvent event) {
 		textFieldLaborCost.getScene().getWindow().hide();
 	}
 }

@@ -1,7 +1,7 @@
 package view;
 
 import javafx.fxml.FXML;
-
+import database.DBConnection;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
@@ -11,6 +11,8 @@ public class ChangePasswordController {
 	private PasswordField passwordField;
 	@FXML
 	private PasswordField confirmPasswordField;
+	
+	DBConnection connection;
 
 	// Event Listener on Button.onAction
 		@FXML
@@ -29,11 +31,22 @@ public class ChangePasswordController {
 			}
 			
 			if(passwordField.getText().equals(confirmPasswordField.getText())) {
-				LoginPageController.setPassword(passwordField.getText());
-				Alert alert = new Alert(Alert.AlertType.INFORMATION);
-				alert.setHeaderText(null);
-				alert.setContentText("Success");
-				alert.showAndWait();
+				String password = passwordField.getText();
+				connection = DBConnection.getInstance();
+				String sqlInsert = "UPDATE Login SET password = '" + password + "' " + "where id = 1";
+				if(connection.executeAction(sqlInsert)) {
+					Alert alert = new Alert(Alert.AlertType.INFORMATION);
+					alert.setHeaderText(null);
+					alert.setContentText("Success");
+					alert.showAndWait();
+				}
+				else {
+					Alert alert = new Alert(Alert.AlertType.ERROR);
+					alert.setHeaderText(null);
+					alert.setContentText("Failed");
+					alert.showAndWait();
+				}
+				
 			}
 			
 		}

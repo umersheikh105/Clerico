@@ -3,7 +3,6 @@ package view;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 
 import javafx.scene.control.TextField;
 
@@ -19,7 +18,7 @@ import javafx.event.ActionEvent;
 
 import javafx.scene.control.ChoiceBox;
 
-public class AddInvoiceController implements Initializable {
+public class AddServiceOrderController implements Initializable {
 	@FXML
 	private ChoiceBox<String> clientChoiceBox;
 	@FXML
@@ -30,10 +29,6 @@ public class AddInvoiceController implements Initializable {
 	private TextField textFieldSignature;
 	@FXML
 	private TextField textFieldNotes;
-	@FXML
-	private Button invoiceAddButton;
-	@FXML
-	private Button invoiceCancelButton;
 
 	DBConnection connection;
 
@@ -62,7 +57,7 @@ public class AddInvoiceController implements Initializable {
 
 	// Event Listener on Button[#invoiceAddButton].onAction
 	@FXML
-	public void addInvoice(ActionEvent event) throws SQLException {
+	public void addServiceOrder(ActionEvent event) throws SQLException {
 		connection = DBConnection.getInstance();
 		String laborCost = textFieldLaborCost.getText();
 		String signature = textFieldSignature.getText();
@@ -92,8 +87,8 @@ public class AddInvoiceController implements Initializable {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String today = formatter.format(date);
 
-		String sqlInsert = "INSERT INTO Form (part_id, labor_cost, date, notes) VALUES (" + "'" + partID + "'," + "'"
-				+ Integer.parseInt(laborCost) + "'," + "'" + today + "'," + "'" + notes + "'" + ")";
+		String sqlInsert = "INSERT INTO Form (part_id, labor_cost, date, notes, form_type) VALUES (" + "'" + partID + "'," + "'"
+				+ Integer.parseInt(laborCost) + "'," + "'" + today + "'," + "'" + notes + "'," + "'S'" + ")";
 
 		connection.executeAction(sqlInsert);
 
@@ -128,7 +123,7 @@ public class AddInvoiceController implements Initializable {
 
 	// Event Listener on Button[#invoiceCancelButton].onAction
 	@FXML
-	public void cancelInvoice(ActionEvent event) {
+	public void cancelServiceOrder(ActionEvent event) {
 		textFieldLaborCost.getScene().getWindow().hide();
 	}
 }

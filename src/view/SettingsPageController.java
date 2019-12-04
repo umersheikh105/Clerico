@@ -98,4 +98,31 @@ public class SettingsPageController {
 		}
 
 	}
+	
+	@FXML
+	void loadAddPartWindow(ActionEvent action) {
+		try {
+			Parent parent = FXMLLoader.load(getClass().getResource("AddPart.fxml"));
+			Stage stage = new Stage(StageStyle.DECORATED);
+			stage.setScene(new Scene(parent));
+			stage.show();
+		} catch (IOException ex) {
+			// Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+		}
+
+	}
+	
+	@FXML
+	void loadPartsTableWindow(ActionEvent action) {
+		try {
+			Parent parent = FXMLLoader.load(getClass().getResource("PartsTable.fxml"));
+			Stage stage = new Stage(StageStyle.DECORATED);
+			stage.setScene(new Scene(parent));
+			stage.show();
+		} catch (IOException ex) {
+			// Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+		}
+
+	}
+	
 }

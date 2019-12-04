@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 
 import java.io.IOException;
@@ -15,7 +16,6 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import database.DBConnection;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -43,7 +43,7 @@ public class ClientListPageController implements Initializable {
 	@FXML
 	private TableView<Client> tableView;
 	@FXML
-	private TableColumn<Client, Integer> tableID;
+	private TableColumn<Client, String> tableID;
 	@FXML
 	private TableColumn<Client, String> tableFirstName;
 	@FXML
@@ -66,12 +66,12 @@ public class ClientListPageController implements Initializable {
 	}
 
 	private void loadDataIntoTable() {
-		connection = new DBConnection();
+		connection = DBConnection.getInstance();
 		String sql = "SELECT * FROM Client";
 		ResultSet rs = connection.executeQuery(sql);
 		try {
 			while (rs.next()) {
-				Integer id = new Integer(rs.getInt("client_id"));
+				String id = String.valueOf((rs.getInt("client_id")));
 				String firstName = rs.getString("firstname");
 				String lastName = rs.getString("lastname");
 				String number = rs.getString("number");
@@ -99,15 +99,15 @@ public class ClientListPageController implements Initializable {
 	}
 
 	public static class Client {
-		private final SimpleIntegerProperty id;
+		private final SimpleStringProperty id;
 		private final SimpleStringProperty firstName;
 		private final SimpleStringProperty lastName;
 		private final SimpleStringProperty address;
 		private final SimpleStringProperty number;
 		private final SimpleStringProperty notes;
 
-		Client(Integer id, String firstName, String lastName, String address, String number, String notes) {
-			this.id = new SimpleIntegerProperty(id);
+		Client(String id, String firstName, String lastName, String address, String number, String notes) {
+			this.id = new SimpleStringProperty(id);
 			this.firstName = new SimpleStringProperty(firstName);
 			this.lastName = new SimpleStringProperty(lastName);
 			this.address = new SimpleStringProperty(address);
@@ -115,8 +115,8 @@ public class ClientListPageController implements Initializable {
 			this.notes = new SimpleStringProperty(notes);
 		}
 
-		public Integer getID() {
-			return new Integer(id.get());
+		public String getId() {
+			return id.get();
 		}
 
 		public String getFirstName() {
@@ -137,6 +137,49 @@ public class ClientListPageController implements Initializable {
 
 		public String getNotes() {
 			return notes.get();
+		}
+
+	}
+
+	@FXML
+	public void deleteClient(ActionEvent event) throws IOException {
+		if (!tableView.getSelectionModel().isEmpty()) {
+			String id = tableID.getCellData(tableView.getSelectionModel().getSelectedItem());
+			int actualID = Integer.parseInt(id);
+			connection = DBConnection.getInstance();
+			String sql = "SELECT * FROM ClientForm where client_id = " + "'" + actualID + "'"
+					+ " ORDER BY form_id DESC";
+			ResultSet rs = connection.executeQuery(sql);
+			try {
+				if (rs.next()) {
+					int formID = rs.getInt("form_id");
+					String sqlDelete = "DELETE FROM ClientForm WHERE form_id = " + "'" + formID + "'";
+					if (connection.executeAction(sqlDelete)) {
+						String sqlDelete2 = "DELETE FROM FORM WHERE form_id = " + "'" + formID + "'";
+						connection.executeAction(sqlDelete2);
+						String sqlClientDelete = "DELETE FROM CLIENT WHERE client_id = " + "'" + actualID + "'";
+						connection.executeAction(sqlClientDelete);
+					}
+				} else {
+					String sqlClientDelete = "DELETE FROM CLIENT WHERE client_id = " + "'" + actualID + "'";
+					connection.executeAction(sqlClientDelete);
+				}
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			tableView.getItems().removeAll(tableView.getSelectionModel().getSelectedItem());
+
+		}
+		else {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setHeaderText(null);
+			alert.setContentText("Please select a row to be deleted!");
+			alert.showAndWait();
+			return;
+			
 		}
 
 	}

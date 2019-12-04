@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="391.0" prefWidth="497.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AddServiceOrderController">
+
+   <children>
+      <VBox prefHeight="425.0" prefWidth="495.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="47.0" prefWidth="280.0" text="Add Service Order" textAlignment="CENTER" underline="true">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="100.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="Select Client">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Label>
+            <ChoiceBox fx:id="clientChoiceBox" prefHeight="28.0" prefWidth="477.0">
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </VBox.margin>
+            </ChoiceBox>
+            <Label text="Select Part">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </VBox.margin>
+            </Label>
+            <ChoiceBox fx:id="partChoiceBox" prefHeight="28.0" prefWidth="477.0">
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </ChoiceBox>
+            <TextField fx:id="textFieldLaborCost" layoutX="20.0" layoutY="30.0" prefHeight="35.0" prefWidth="474.0" promptText="Labor Cost">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="textFieldSignature" layoutX="10.0" layoutY="65.0" prefHeight="35.0" prefWidth="474.0" promptText="Signature">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="textFieldNotes" prefHeight="35.0" promptText="Note(s)">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="10.0" right="10.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <HBox prefHeight="44.0" prefWidth="495.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#addServiceOrder" prefHeight="44.0" prefWidth="250.0" text="Add" underline="true">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#cancelServiceOrder" prefHeight="44.0" prefWidth="250.0" text="Cancel" underline="true" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
